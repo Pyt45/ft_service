@@ -1,0 +1,7 @@
+1 == > a kubernetes cluster consists of two types of resources:
+    the master cooresinates the cluster
+    Nodes are the worker that run application
+2 == > start a cluster by typing : minikube start --wait=false
+check info about the cluster => kubectl cluster-info
+get info about nodes ==> kubectl get nodes
+3 == > deploy an image : kubectl create deployment first-deployment --image=image-name
