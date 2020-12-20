@@ -17,7 +17,9 @@ COPY src/nginx.conf /etc/nginx/nginx.conf
 # install openssl and generate ssl certificate
 
 RUN apk add openssl
-RUN yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/certs/localhost.key -out /etc/ssl/certs/localhost.crt
+RUN yes "" | openssl req -x509 -nodes -days 365 \
+ -newkey rsa:2048 -keyout /etc/ssl/certs/localhost.key \
+ -out /etc/ssl/certs/localhost.crt
 
 # copy some file
 
