@@ -21,6 +21,14 @@ RUN yes "" | openssl req -x509 -nodes -days 365 \
  -newkey rsa:2048 -keyout /etc/ssl/certs/localhost.key \
  -out /etc/ssl/certs/localhost.crt
 
+# Setting up a ssh-server
+
+RUN apk add openssh
+# Enable the sshd service so that it starts at boot:
+RUN rc-update add sshd
+# List services to verify sshd is enabled:
+RUN rc-status
+
 # copy some file
 
 COPY src/index.html /www/index.html
@@ -31,6 +39,7 @@ RUN chmod +x /usr/bin/run.sh
 
 EXPOSE 80
 EXPOSE 443
+EXPOSE 22
 
 ENTRYPOINT /usr/bin/run.sh
 
