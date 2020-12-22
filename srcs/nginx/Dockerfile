@@ -1,12 +1,11 @@
 FROM alpine:latest
-
+ARG user
 # update , remove cache to keep the conatiner small and install nginx
 
 RUN apk update
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 RUN apk add openrc --no-cache
 RUN apk add nginx && mkdir /run/nginx
-
 # # setup nginx
 
 RUN adduser -D -g 'www' www
@@ -23,6 +22,19 @@ RUN yes "" | openssl req -x509 -nodes -days 365 \
     -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key \
     -out /etc/ssl/certs/nginx-selfsigned.crt;
 
+# Setting up a ssh-server
+
+RUN apk add openssh
+RUN mkdir /run/openrc/
+RUN mkdir /run/openrc/softlevel
+# RUN rc-update add sshd
+# RUN rc-status
+
+# Create a user
+RUN adduser -D user
+RUN echo "user:pass1234" | chpasswd
+RUN ssh-keygen -A
+
 # copy files
 
 ADD ./src/index.html /www/index.html
@@ -33,6 +45,6 @@ RUN chmod +x /bin/run.sh
 
 EXPOSE 80
 EXPOSE 443
-# EXPOSE 22
+EXPOSE 22
 
-ENTRYPOINT /bin/run.sh
+ENTRYPOINT /bin/run.sh; /etc/init.d/sshd start

@@ -35,6 +35,7 @@ RUN adduser --disabled-password user
 RUN echo "user:password" | chpasswd
 RUN ssh-keygen -t rsa -b 4096 -f /tmp/sshkey -q -N ""
 # RUN ssh-keygen -A
+
 #copy some file
 
 COPY src/index.html /www/index.html

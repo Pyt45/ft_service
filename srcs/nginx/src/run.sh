@@ -1,3 +1,4 @@
 echo "Starting"
 nginx -g 'daemon off;'
-/bin/sh
+# /etc/init.d/sshd start
+# /bin/sh

@@ -18,5 +18,6 @@ spec:
       - name: nginx-app
         image: nginx-ayoub
         imagePullPolicy: Never
-        # ports:
-        # - containerPort: 443
+        ports:
+        - containerPort: 443
+        - containerPort: 80
