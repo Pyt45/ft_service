@@ -25,8 +25,10 @@ RUN yes "" | openssl req -x509 -nodes -days 365 \
 # Setting up a ssh-server
 
 RUN apk add openssh
-RUN mkdir /run/openrc/
+RUN rc-status
+# RUN mkdir /run/openrc/
 RUN mkdir /run/openrc/softlevel
+RUN /etc/init.d/sshd start
 # RUN rc-update add sshd
 # RUN rc-status
 
@@ -38,8 +40,8 @@ RUN ssh-keygen -A
 # copy files
 
 ADD ./src/index.html /www/index.html
-ADD ./src/run.sh /bin/run.sh
-RUN chmod +x /bin/run.sh
+ADD ./src/run.sh /usr/bin/run.sh
+RUN chmod +x /usr/bin/run.sh
 
 # define port
 
@@ -47,4 +49,4 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 22
 
-ENTRYPOINT /bin/run.sh; /etc/init.d/sshd start
+ENTRYPOINT /usr/bin/run.sh
