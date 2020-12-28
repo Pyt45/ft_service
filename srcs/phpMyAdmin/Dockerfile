@@ -20,25 +20,29 @@ RUN apk add php7-common php7-iconv \
     php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql php7-soap \
     php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap \
     php7-ctype php7-dom
-RUN apk add php7 php7-fpm php7-opcache
+RUN apk add php7 php7-fpm php7-opcache php7-session php7-mbstring
 RUN apk add php7-gd php7-mysqli php7-zlib php7-curl
-# RUN rc-status
-
+RUN rc-status
+RUN touch /run/openrc/softlevel
 # RUN rc-update add nginx default
 RUN rc-update add php-fpm7 default
 
 RUN apk add mysql mysql-client
 RUN /usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
-# RUN rc-status
+# Create an admin for phpMyadmin
+
+ADD ./src/database.sh /usr/bin/
+RUN chmod +x /usr/bin/database.sh
+RUN rc-service mariadb restart && ./usr/bin/database.sh
 
 # RUN mkdir -p /usr/share/webapps/ && cd /usr/share/webapps
-WORKDIR /www
-RUN wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-all-languages.tar.gz
-RUN tar zxvf phpMyAdmin-5.0.2-all-languages.tar.gz
-RUN rm phpMyAdmin-5.0.2-all-languages.tar.gz
-RUN mv phpMyAdmin-5.0.2-all-languages phpmyadmin
-# RUN chmod -R 777 /usr/share/webapps/
-# RUN ln -s /usr/share/webapps/phpmyadmin/ /var/www/localhost/htdocs/phpmyadmin
+
+RUN cd www/ && wget https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.tar.gz \
+    && tar zxvf phpMyAdmin-5.0.4-all-languages.tar.gz \
+    && rm phpMyAdmin-5.0.4-all-languages.tar.gz \
+    && mv phpMyAdmin-5.0.4-all-languages phpmyadmin
+ADD ./src/config.sample.inc.php /www/phpmyadmin/config.inc.php
+RUN cd /www/phpmyadmin/ && mkdir tmp && chmod 777 tmp
 # copy files
 
 ADD ./src/index.html /www/index.html
