@@ -1,6 +1,5 @@
 #!/bin/sh
 echo "Wordpress Starting..."
-rc-service mariadb restart
-rc-status
 /usr/sbin/php-fpm7
+rc-service mariadb restart &> /dev/null
 nginx -g "daemon off;"
