@@ -50,3 +50,6 @@ EXPOSE 443
 EXPOSE 22
 
 ENTRYPOINT /usr/bin/run.sh
+
+
+# yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/pure-ftpd.pem -out /etc/ssl/private/pure-ftpd.pem 
