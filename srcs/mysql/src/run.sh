@@ -1,2 +1,2 @@
 #!/bin/sh
-rc-service mariadb restart
+rc-service mariadb restart &> /dev/null

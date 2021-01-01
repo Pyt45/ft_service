@@ -9,13 +9,15 @@ spec:
     app: wordpress
     tier: mysql
   ports:
-  - port: 3306
-  CLusterIp: None
+  - name: mysql
+    port: 3306
+    targetPort: 3306
+  type: ClusterIP
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pv-claim
+  name: mysql-volume
   labels:
     app: wordpress
 spec:
@@ -26,6 +28,7 @@ spec:
       storage: 20Gi
 ---
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: wordpress-mysql
   labels:
@@ -62,4 +65,4 @@ spec:
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: mysql-pv-claim
+          claimName: mysql-volume
