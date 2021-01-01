@@ -28,13 +28,13 @@ RUN apk add php7-gd php7-mysqli php7-zlib php7-curl
 
 RUN rc-update add php-fpm7 default
 
-RUN apk add mysql mysql-client
-RUN /usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
-RUN rc-update add mariadb default
+# RUN apk add mysql mysql-client
+# RUN /usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
+# RUN rc-update add mariadb default
 # Create database
-ADD ./src/database.sh /usr/bin/
-RUN chmod +x /usr/bin/database.sh
-RUN rc-service mariadb restart && ./usr/bin/database.sh
+# ADD ./src/database.sh /usr/bin/
+# RUN chmod +x /usr/bin/database.sh
+# RUN rc-service mariadb restart && ./usr/bin/database.sh
 
 # Install wordpress
 
@@ -42,7 +42,7 @@ RUN cd www/ && wget http://wordpress.org/latest.tar.gz \
     && tar -xzvf latest.tar.gz && rm -rf latest.tar.gz
 RUN cd www/wordpress && rm -f wp-config-sample.php
 
-ADD ./src/wp-config-sample.php /www/wordpress/wp-config-sample.php
+ADD ./src/wp-config-sample.php /www/wordpress/wp-config.php
 
 # copy files
 
