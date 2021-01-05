@@ -17,10 +17,10 @@ RUN apk update && \
     apk upgrade && \
 	apk add mysql mysql-client curl --no-cache
 
-COPY user.sh /user.sh
+COPY ./src/user.sh /user.sh
 RUN chmod +x /user.sh
-COPY ./src/my.cnf /etc/my.cnf
-# COPY wordpress.sql /wordpress.sql
+COPY ./src/my.cnf /etc/mysql/my.cnf
+COPY ./src/wordpress.sql /wordpress.sql
 
 
 EXPOSE 3306

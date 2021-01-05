@@ -52,7 +52,7 @@ RUN chmod +x /usr/bin/run.sh
 
 # define port
 
-EXPOSE 80
+EXPOSE 5050
 
 ENTRYPOINT ./usr/bin/run.sh
 

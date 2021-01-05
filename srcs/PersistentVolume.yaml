@@ -4,31 +4,44 @@ metadata:
   name: wordpress-persistent-storage
   labels:
     app: wordpress
-    tier: frontend
 spec:
   capacity:
-    storage: 10Gi
+    storage: 1Gi
   accessModes:
-    - ReadWriteMany
-  nfs:
-    server: 172.31.39.63
-    # Exported path of your NFS server
-    path: "/html"
-
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /private/var/vm
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - minikube
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: mysql-persistent-storage
   labels:
-    app: wordpress
-    tier: mysql
+    app: mysql
 spec:
   capacity:
-    storage: 10Gi
+    storage: 1Gi
   accessModes:
-    - ReadWriteMany
-  nfs:
-    server: 172.31.39.63
-    # Exported path of your NFS server
-    path: "/mysql"
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /private/var/vm
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - minikube
