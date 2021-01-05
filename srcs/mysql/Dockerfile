@@ -1,16 +1,22 @@
 FROM alpine:latest
 
-RUN apk add openrc mysql mysql-client --no-cache
+RUN apk update && \
+    apk upgrade && \
+    apk add openrc mysql mysql-client --no-cache
+
+
 RUN rc-status
 RUN touch /run/openrc/softlevel
-RUN /usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
-RUN rc-update add mariadb default
-ADD ./src/user.sh /usr/bin/user.sh
-RUN chmod +x /usr/bin/user.sh
-RUN rc-service mariadb start && /usr/bin/user.sh
-ADD ./src/run.sh /usr/bin/run.sh
-RUN chmod +x /usr/bin/run.sh
-ENTRYPOINT /usr/bin/run.sh
+
+ADD ./src/my.cnf /etc/mysql/my.cnf
+RUN sed -i "s/#bind-address=0.0.0.0/bind-address=0.0.0.0/" /etc/my.cnf.d/mariadb-server.cnf
+ADD ./src/entry-point.sh /usr/bin/entry-point.sh
+ADD ./src/create-admin.sh /usr/bin/create-admin.sh
+RUN chmod +x /usr/bin/entry-point.sh
+RUN chmod +x /usr/bin/create-admin.sh
+
+EXPOSE 3306
+ENTRYPOINT /usr/bin/entry-point.sh
 # FROM alpine
 
 # RUN apk update && \
@@ -21,8 +27,3 @@ ENTRYPOINT /usr/bin/run.sh
 # RUN chmod +x /usr/bin/user.sh
 # COPY ./src/my.cnf /etc/mysql/my.cnf
 # # COPY ./src/wordpress.sql /wordpress.sql
-
-
-# EXPOSE 3306
-# ENTRYPOINT /usr/bin/user.sh
-# CMD ["/user.sh"]

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-echo "create user admin@localhost identified by 'admin';" | mysql -u root
-echo "grant all privileges on *.* to admin@localhost;" | mysql -u root
-echo "flush privileges;" | mysql -u root
-echo "quit" | mysql -u root
+# echo "create user admin@localhost identified by 'admin';" | mysql -u root
+# echo "grant all privileges on *.* to admin@localhost;" | mysql -u root
+# echo "flush privileges;" | mysql -u root
+# echo "quit" | mysql -u root
 
 # mkdir -p /run/mysqld
 # mkdir -p /var/lib/mysql
@@ -28,3 +28,18 @@ echo "quit" | mysql -u root
 
 # echo '-----------DEAMON-----------'
 # exec /usr/bin/mysqld --user=admin --datadir=/var/lib/mysql
+
+# mkdir -p /var/lib/mysql /var/run/mysqld
+# chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
+
+
+mkidr -p /run/mysqld
+mkdir -p /var/lib/mysql
+if [ ! -d /var/lib/mysql]; then
+    echo "------------INSTALL------------"
+    /usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
+    echo "------------SETUP  ------------"
+    rc-service mariadb restart && /usr/bin/create-admin.sh &> /dev/null
+fi
+
+tail -f /dev/null

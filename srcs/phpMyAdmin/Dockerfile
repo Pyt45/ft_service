@@ -27,13 +27,14 @@ RUN touch /run/openrc/softlevel
 # RUN rc-update add nginx default
 RUN rc-update add php-fpm7 default
 
-RUN apk add mysql mysql-client
-RUN /usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
+# RUN apk add mysql mysql-client
+# RUN /usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
+
 # Create an admin for phpMyadmin
 
-ADD ./src/database.sh /usr/bin/
-RUN chmod +x /usr/bin/database.sh
-RUN rc-service mariadb restart && ./usr/bin/database.sh
+# ADD ./src/database.sh /usr/bin/
+# RUN chmod +x /usr/bin/database.sh
+# RUN rc-service mariadb restart && ./usr/bin/database.sh
 
 # RUN mkdir -p /usr/share/webapps/ && cd /usr/share/webapps
 

@@ -88,7 +88,7 @@ spec:
         imagePullPolicy: Never
         env:
         - name: WORDPRESS_DB_HOST
-          value: mysql:3306
+          value: mysql
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
