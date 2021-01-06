@@ -4,7 +4,7 @@
 # echo "grant all privileges on *.* to admin@localhost;" | mysql -u root
 # echo "flush privileges;" | mysql -u root
 # echo "quit" | mysql -u root
-
+# ib_buffer_pool
 # mkdir -p /run/mysqld
 # mkdir -p /var/lib/mysql
 
@@ -33,13 +33,17 @@
 # chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
 
 
-mkdir -p /run/mysqld
-mkdir -p /var/lib/mysql
+# mkdir -p /run/mysqld
+# mkdir -p /var/lib/mysql
 if [ ! -d /var/lib/mysql ]; then
     echo "------------INSTALL------------"
-    /usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
+    /etc/init.d/mariadb setup &> /dev/null
+    #/usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
     echo "------------SETUP  ------------"
-    rc-service mariadb restart && /usr/bin/create-admin.sh &> /dev/null
+    rc-service mariadb restart &> /dev/null
+    /usr/bin/create-admin.sh &> /dev/null
 fi
-
+sed -i "s/#bind-address=0.0.0.0/bind-address=0.0.0.0/g" /etc/my.cnf.d/mariadb-server.cnf
+sed -i "s/skip-networking/#skip-networking/g" /etc/my.cnf.d/mariadb-server.cnf
+rc-service mariadb restart &> /dev/null
 tail -f /dev/null
