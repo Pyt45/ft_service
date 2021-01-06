@@ -9,7 +9,7 @@ RUN apk update && \
 RUN openrc && touch /run/openrc/softlevel
 
 # ADD ./src/my.cnf /etc/mysql/my.cnf
-RUN sed -i "s/#bind-address=0.0.0.0/bind-address=0.0.0.0/" /etc/my.cnf.d/mariadb-server.cnf
+# RUN sed -i "s/#bind-address=0.0.0.0/bind-address=0.0.0.0/" /etc/my.cnf.d/mariadb-server.cnf
 ADD ./src/entry-point.sh /usr/bin/entry-point.sh
 ADD ./src/create-admin.sh /usr/bin/create-admin.sh
 RUN chmod +x /usr/bin/entry-point.sh
