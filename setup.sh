@@ -4,7 +4,7 @@
 # # On first install only
 # kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 
-kubectl apply -f ./srcs/metallb-config.yaml
+# kubectl apply -f ./srcs/metallb-config.yaml
 # Create images from Dockerfile
 arr=(
     nginx
@@ -16,7 +16,7 @@ for i in "${arr[@]}"; do
 done
 
 # Create secret for mysql
-kubectl apply -f ./srcs/secret.yaml
+# kubectl apply -f ./srcs/secret.yaml
 # Create volumes
 kubectl apply -f ./srcs/PersistentVolume.yaml
 # Applying yaml files to deploy nignx mysql and wordpress

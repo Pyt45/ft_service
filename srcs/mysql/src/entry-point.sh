@@ -33,9 +33,9 @@
 # chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
 
 
-mkidr -p /run/mysqld
+mkdir -p /run/mysqld
 mkdir -p /var/lib/mysql
-if [ ! -d /var/lib/mysql]; then
+if [ ! -d /var/lib/mysql ]; then
     echo "------------INSTALL------------"
     /usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
     echo "------------SETUP  ------------"
