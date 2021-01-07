@@ -33,6 +33,7 @@ RUN echo "local_enable=YES" >> /etc/vsftpd/vsftpd.conf \
 ADD /src/run.sh /
 RUN chmod +x run.sh
 
-EXPOSE 21 10090-10100
+# EXPOSE 21 10090-10100
+EXPOSE 21
 
 CMD /run.sh

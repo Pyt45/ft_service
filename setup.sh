@@ -11,16 +11,26 @@ arr=(
     mysql
     phpmyadmin
     wordpress
+    ftps
 )
+
+echo "-------delete-------"
+for k in "${arr[@]}"; do
+    kubectl delete -f ./srcs/$k-deployment.yaml
+done
+echo "------- done -------"
+
+echo "-------create-------"
 for i in "${arr[@]}"; do
     docker build -t $i ./srcs/$i
 done
 
 # Create secret for mysql
-# kubectl apply -f ./srcs/secret.yaml
+kubectl apply -f ./srcs/secret.yaml
 # Create volumes
 kubectl apply -f ./srcs/PersistentVolume.yaml
 # Applying yaml files to deploy nignx mysql and wordpress
 for j in "${arr[@]}"; do
     kubectl apply -f ./srcs/$j-deployment.yaml
 done
+echo "------- done -------"
