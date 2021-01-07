@@ -10,6 +10,7 @@ arr=(
     nginx
     mysql
     phpmyadmin
+    wordpress
 )
 for i in "${arr[@]}"; do
     docker build -t $i ./srcs/$i
