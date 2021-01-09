@@ -31,3 +31,6 @@ ENTRYPOINT /usr/bin/entry-point.sh
 
 # EXPOSE 8086
 # ENTRYPOINT /usr/bin/entry-point.sh
+
+# RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ telegraf \
+# && mkdir -p /etc/telegraf
