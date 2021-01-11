@@ -2,7 +2,7 @@ FROM alpine:latest
 
 RUN apk update
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
-RUN apk add openrc wget --no-cache
+RUN apk add openrc supervisor wget --no-cache
 RUN apk add nginx && mkdir /run/nginx
 
 # # setup nginx
@@ -48,13 +48,15 @@ ADD ./src/wp-config-sample.php /www/wordpress/wp-config.php
 
 ADD ./src/index.html /www/index.html
 ADD ./src/run.sh /usr/bin/run.sh
+ADD ./src/supervisord.conf /etc/supervisord.conf
 RUN chmod +x /usr/bin/run.sh
 
 # define port
 
+EXPOSE 80
 EXPOSE 5050
 
-ENTRYPOINT ./usr/bin/run.sh
+ENTRYPOINT ["/usr/bin/supervisord"]
 
 
 
