@@ -38,7 +38,6 @@ RUN echo "user:pass1234" | chpasswd
 RUN ssh-keygen -A
 
 # copy files
-
 ADD ./src/index.html /www/index.html
 ADD ./src/run.sh /usr/bin/run.sh
 RUN chmod +x /usr/bin/run.sh

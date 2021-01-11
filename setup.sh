@@ -12,6 +12,9 @@ arr=(
     phpmyadmin
     wordpress
     ftps
+    telegraf
+    influxdb
+    grafana
 )
 
 echo "-------delete-------"
@@ -24,7 +27,7 @@ echo "-------create-------"
 for i in "${arr[@]}"; do
     docker build -t $i ./srcs/$i
 done
-
+kubectl create namespace monitoring
 # Create secret for mysql
 kubectl apply -f ./srcs/secret.yaml
 # Create volumes

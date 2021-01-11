@@ -1,2 +1,3 @@
 #!/bin/sh
-/usr/sbin/grafana-server &
+/usr/sbin/grafana-server
+tail -f /dev/null
