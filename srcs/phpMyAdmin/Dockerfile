@@ -4,7 +4,7 @@ ARG user
 
 RUN apk update
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
-RUN apk add openrc --no-cache
+RUN apk add openrc supervisor --no-cache
 RUN apk add nginx && mkdir /run/nginx && rc-update add nginx default
 # # setup nginx
 
@@ -49,6 +49,7 @@ RUN cd /www/phpmyadmin/ && mkdir tmp && chmod 777 tmp
 ADD ./src/index.html /www/index.html
 ADD ./src/test1.php /www/test1.php
 ADD ./src/run.sh /usr/bin/run.sh
+ADD ./src/supervisord.conf /etc/supervisord.conf
 RUN chmod +x /usr/bin/run.sh
 RUN rc-status
 RUN touch /run/openrc/softlevel
@@ -60,4 +61,4 @@ RUN rc-service php-fpm7 restart
 EXPOSE 80
 EXPOSE 5000
 
-ENTRYPOINT /usr/bin/run.sh
+ENTRYPOINT ["/usr/bin/supervisord"]
