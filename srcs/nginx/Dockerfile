@@ -4,7 +4,7 @@ ARG user
 
 RUN apk update
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
-RUN apk add openrc --no-cache
+RUN apk add openrc supervisor --no-cache
 RUN apk add nginx && mkdir /run/nginx
 # # setup nginx
 
@@ -40,6 +40,7 @@ RUN ssh-keygen -A
 # copy files
 ADD ./src/index.html /www/index.html
 ADD ./src/run.sh /usr/bin/run.sh
+ADD ./src/supervisord.conf /etc/supervisord.conf
 RUN chmod +x /usr/bin/run.sh
 
 # define port
@@ -48,7 +49,7 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 22
 
-ENTRYPOINT /usr/bin/run.sh
+ENTRYPOINT ["/usr/bin/supervisord"]
 
 
 # yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/pure-ftpd.pem -out /etc/ssl/private/pure-ftpd.pem 
