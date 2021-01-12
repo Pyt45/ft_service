@@ -4,7 +4,9 @@ RUN apk update
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 RUN apk add openrc supervisor wget --no-cache
 RUN apk add nginx && mkdir /run/nginx
-
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+RUN apk add telegraf
+RUN mkdir -p /etc/telegraf
 # # setup nginx
 
 RUN adduser -D -g 'www' www
@@ -48,6 +50,7 @@ ADD ./src/wp-config-sample.php /www/wordpress/wp-config.php
 
 ADD ./src/index.html /www/index.html
 ADD ./src/run.sh /usr/bin/run.sh
+ADD ./src/telegraf.conf /etc/telegraf/telegraf.conf
 ADD ./src/supervisord.conf /etc/supervisord.conf
 RUN chmod +x /usr/bin/run.sh
 

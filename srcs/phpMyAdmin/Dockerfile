@@ -6,6 +6,9 @@ RUN apk update
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 RUN apk add openrc supervisor --no-cache
 RUN apk add nginx && mkdir /run/nginx && rc-update add nginx default
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+RUN apk add telegraf
+RUN mkdir -p /etc/telegraf
 # # setup nginx
 
 RUN adduser -D -g 'www' www
@@ -27,17 +30,6 @@ RUN touch /run/openrc/softlevel
 # RUN rc-update add nginx default
 RUN rc-update add php-fpm7 default
 
-# RUN apk add mysql mysql-client
-# RUN /usr/bin/mysql_install_db --user=mysql --datadir=/var/lib/mysql
-
-# Create an admin for phpMyadmin
-
-# ADD ./src/database.sh /usr/bin/
-# RUN chmod +x /usr/bin/database.sh
-# RUN rc-service mariadb restart && ./usr/bin/database.sh
-
-# RUN mkdir -p /usr/share/webapps/ && cd /usr/share/webapps
-
 RUN cd www/ && wget https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.tar.gz \
     && tar zxvf phpMyAdmin-5.0.4-all-languages.tar.gz \
     && rm phpMyAdmin-5.0.4-all-languages.tar.gz \
@@ -49,6 +41,7 @@ RUN cd /www/phpmyadmin/ && mkdir tmp && chmod 777 tmp
 ADD ./src/index.html /www/index.html
 ADD ./src/test1.php /www/test1.php
 ADD ./src/run.sh /usr/bin/run.sh
+ADD ./src/telegraf.conf /etc/telegraf/telegraf.conf
 ADD ./src/supervisord.conf /etc/supervisord.conf
 RUN chmod +x /usr/bin/run.sh
 RUN rc-status

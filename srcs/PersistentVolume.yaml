@@ -46,40 +46,10 @@
 #           values:
 #           - minikube
 
-# apiVersion: v1
-# kind: PersistentVolume
-# metadata:
-#   name: mysql-persistent-storage
-#   labels:
-#     type: local
-# spec:
-#   storageClassName: manual
-#   capacity:
-#     storage: 128M
-#   accessModes:
-#     - ReadWriteOnce
-#   hostPath:
-#     path: "/mnt/data"
-# ---
-# apiVersion: v1
-# kind: PersistentVolume
-# metadata:
-#   name: wordpress-persistent-storage
-#   labels:
-#     type: local
-# spec:
-#   storageClassName: manual
-#   capacity:
-#     storage: 128M
-#   accessModes:
-#     - ReadWriteOnce
-#   hostPath:
-#     path: "/mnt/data"
-# ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: influxdb-persistent-storage
+  name: mysql-persistent-storage
   labels:
     type: local
 spec:
@@ -91,11 +61,25 @@ spec:
   hostPath:
     path: "/mnt/data"
 ---
-
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: telegraf-persistent-storage
+  name: wordpress-persistent-storage
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 128M
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: influxdb-persistent-storage
   labels:
     type: local
 spec:

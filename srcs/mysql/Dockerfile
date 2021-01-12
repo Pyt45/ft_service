@@ -4,6 +4,10 @@ RUN apk update && \
     apk upgrade && \
     apk add openrc mariadb mariadb-client --no-cache
 
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+RUN apk add telegraf
+RUN mkdir -p /etc/telegraf
+
 
 # RUN rc-status
 RUN openrc && touch /run/openrc/softlevel
@@ -12,6 +16,7 @@ RUN openrc && touch /run/openrc/softlevel
 # RUN sed -i "s/#bind-address=0.0.0.0/bind-address=0.0.0.0/" /etc/my.cnf.d/mariadb-server.cnf
 ADD ./src/entry-point.sh /usr/bin/entry-point.sh
 ADD ./src/create-admin.sh /usr/bin/create-admin.sh
+ADD ./src/telegraf.conf /etc/telegraf/telegraf.conf
 RUN chmod +x /usr/bin/entry-point.sh
 RUN chmod +x /usr/bin/create-admin.sh
 

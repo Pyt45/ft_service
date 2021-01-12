@@ -46,5 +46,6 @@ if [ ! -f "/var/lib/mysql/ib_buffer_pool" ]; then
 fi
 sed -i "s/#bind-address=0.0.0.0/bind-address=0.0.0.0/g" /etc/my.cnf.d/mariadb-server.cnf
 sed -i "s/skip-networking/#skip-networking/g" /etc/my.cnf.d/mariadb-server.cnf
+/usr/bin/telegraf --config /etc/telegraf/telegraf.conf --config-directory /etc/telegraf.conf.d
 rc-service mariadb restart &> /dev/null
 tail -f /dev/null
