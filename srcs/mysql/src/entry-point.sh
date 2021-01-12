@@ -42,10 +42,12 @@ if [ ! -f "/var/lib/mysql/ib_buffer_pool" ]; then
     echo "------------SETUP  ------------"
     rc-service mariadb restart &> /dev/null
     /usr/bin/create-admin.sh &> /dev/null
+    mysql -u root < /wordpress.sql
     echo "Done"
 fi
-sed -i "s/#bind-address=0.0.0.0/bind-address=0.0.0.0/g" /etc/my.cnf.d/mariadb-server.cnf
+# sed -i "s/#bind-address=0.0.0.0/bind-address=0.0.0.0/g" /etc/my.cnf.d/mariadb-server.cnf
 sed -i "s/skip-networking/#skip-networking/g" /etc/my.cnf.d/mariadb-server.cnf
-/usr/bin/telegraf --config /etc/telegraf/telegraf.conf --config-directory /etc/telegraf.conf.d
 rc-service mariadb restart &> /dev/null
-tail -f /dev/null
+# /usr/bin/telegraf --config /etc/telegraf/telegraf.conf --config-directory /etc/telegraf.conf.d
+/usr/bin/supervisord
+# tail -f /dev/null

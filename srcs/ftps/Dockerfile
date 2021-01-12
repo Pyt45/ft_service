@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk add --no-cache vsftpd openssl openssh
+RUN apk add --no-cache vsftpd supervisor openssl openssh
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN apk add telegraf
 RUN mkdir -p /etc/telegraf
@@ -33,11 +33,12 @@ RUN echo "local_enable=YES" >> /etc/vsftpd/vsftpd.conf \
     && echo 'pasv_min_port=10090' >> /etc/vsftpd/vsftpd.conf \
     && sed -i "s/anonymous_enable=YES/anonymous_enable=NO/" /etc/vsftpd/vsftpd.conf
 
-ADD /src/run.sh /
+# ADD /src/run.sh /
 ADD ./src/telegraf.conf /etc/telegraf/telegraf.conf
-RUN chmod +x run.sh
+ADD ./src/supervisord.conf /etc/supervisord.conf
+# RUN chmod +x run.sh
 
 # EXPOSE 21 10090-10100
 EXPOSE 21
 
-CMD /run.sh
+ENTRYPOINT ["/usr/bin/supervisor"]
