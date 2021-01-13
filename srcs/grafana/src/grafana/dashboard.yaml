@@ -1,0 +1,12 @@
+apiVersion: v1
+
+providers:
+  - name: 'influxdb'
+    ordId: 1
+    folder: ''
+    folderUid: ''
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: false
+    options:
+      path: /var/lib/grafana/dashboards

@@ -9,7 +9,7 @@ RUN adduser -D user
 RUN echo "user:pass1234" | /usr/sbin/chpasswd
 RUN yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem 
-
+# ADD ./src/vsftpd.conf /etc/vsftpd/
 RUN echo "local_enable=YES" >> /etc/vsftpd/vsftpd.conf \
     && echo "chroot_local_user=YES" >> /etc/vsftpd/vsftpd.conf \
     && echo "allow_writeable_chroot=YES" >> /etc/vsftpd/vsftpd.conf \
@@ -29,8 +29,9 @@ RUN echo "local_enable=YES" >> /etc/vsftpd/vsftpd.conf \
     && echo 'ssl_sslv2=NO' >> /etc/vsftpd/vsftpd.conf \
     && echo 'ssl_sslv3=NO' >> /etc/vsftpd/vsftpd.conf \
     && echo 'require_ssl_reuse=NO' >> /etc/vsftpd/vsftpd.conf \
-    && echo 'pasv_max_port=10100' >> /etc/vsftpd/vsftpd.conf \
-    && echo 'pasv_min_port=10090' >> /etc/vsftpd/vsftpd.conf \
+    && echo 'pasv_max_port=21100' >> /etc/vsftpd/vsftpd.conf \
+    && echo 'pasv_min_port=21100' >> /etc/vsftpd/vsftpd.conf \
+    && echo 'pasv_address= 192.168.99.234' >> /etc/vsftpd/vsftpd.conf \
     && sed -i "s/anonymous_enable=YES/anonymous_enable=NO/" /etc/vsftpd/vsftpd.conf
 
 # ADD /src/run.sh /
@@ -39,6 +40,7 @@ ADD ./src/supervisord.conf /etc/supervisord.conf
 # RUN chmod +x run.sh
 
 # EXPOSE 21 10090-10100
+EXPOSE 21100
 EXPOSE 21
 
 ENTRYPOINT ["/usr/bin/supervisor"]

@@ -8,6 +8,10 @@ RUN mkdir -p /etc/telegraf
 RUN mkdir -p /etc/influxdb
 ADD ./src/influxdb.conf /etc/influxdb/influxdb.conf
 ADD ./src/telegraf.conf /etc/telegraf/telegraf.conf
+ADD ./src/create-admin.sh /
+# RUN chmod +x /create-admin.sh \
+#     && influx &> /dev/null \
+#     && ./create-admin.sh
 ADD ./src/supervisord.conf /etc/
 RUN openrc && touch /run/openrc/softlevel
 # ADD ./src/entry-point.sh /usr/bin/entry-point.sh
