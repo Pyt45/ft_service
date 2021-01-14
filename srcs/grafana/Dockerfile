@@ -12,17 +12,12 @@ RUN mkdir -p /etc/telegraf \
     && mkdir -p /etc/grafana/provisioning \
     && mkdir -p /etc/grafana/provisioning/dashboards \
     && mkdir -p /etc/grafana/provisioning/datasources
-    # && mkdir -p /var/lib/grafana \
-    # && mkdir -p /var/lib/grafana/dashboards
 
-# ADD ./src/entry-point.sh /usr/bin/entry-point.sh
 ADD ./src/telegraf.conf /etc/telegraf/telegraf.conf
 ADD ./src/supervisord.conf /etc/
-ADD ./src/grafana/dashboard.yaml /etc/grafana/provisioning/dashboards/
-ADD ./src/grafana/datasource.yaml /etc/grafana/provisioning/datasources/
-ADD ./src/panel/* /etc/grafana/provisioning/dashboards/
-# RUN chmod +x /usr/bin/entry-point.sh
-ADD ./src/grafana.ini /etc/grafana/grafana.ini
+ADD ./src/grafana/dashboard.yaml /grafana/conf/provisioning/dashboards/
+ADD ./src/grafana/datasource.yaml /grafana/conf/provisioning/datasources/
+ADD ./src/panel/* /grafana/conf/provisioning/dashboards/
 
 EXPOSE 3000
 ENTRYPOINT ["/usr/bin/supervisord"]

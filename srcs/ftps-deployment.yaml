@@ -38,5 +38,5 @@ spec:
     targetPort: 21
     protocol: TCP
     name: ftps
-  - port: 21100
+  - port: 21000
     name: ftps-send

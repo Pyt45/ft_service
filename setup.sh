@@ -1,11 +1,38 @@
-#!/bin/bash
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
-# # On first install only
-kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+#!/bin/sh
 
-kubectl apply -f ./srcs/metallb-config.yaml
-# Create images from Dockerfile
+# echo " \033[1;31m_______ _________   _______  _______  _______          _________ _______  _______  _______  "
+# echo "(  ____ \\\\\__   __/  (  ____ \(  ____ \(  ____ )|\     /|\__   __/(  ____ \(  ____ \(  ____ \ "
+# echo "| (    \/   ) (     | (    \/| (    \/| (    )|| )   ( |   ) (   | (    \/| (    \/| (    \/ "
+# echo "| (__       | |     | (_____ | (__    | (____)|| |   | |   | |   | |      | (__    | (_____  "
+# echo "|  __)      | |     (_____  )|  __)   |     __)( (   ) )   | |   | |      |  __)   (_____  ) "
+# echo "| (         | |           ) || (      | (\ (    \ \_/ /    | |   | |      | (            ) | "
+# echo "| )         | |     /\____) || (____/\| ) \ \__  \   /  ___) (___| (____/\| (____/\/\____) | "
+# echo "|/          )_(_____\_______)(_______/|/   \__/   \_/   \_______/(_______/(_______/\_______) "
+# echo "              (_____)                                                                        \033[0m"
+
+# printf "\n\n\033[1;31m    █▀▀ ▀█▀    █▀ █▀▀ █▀█ █░█ █ █▀▀ █▀▀ █▀\033[0m\n"
+# printf         "\033[1;31m    █▀░ ░█░ ▀▀ ▄█ ██▄ █▀▄ ▀▄▀ █ █▄▄ ██▄ ▄█\033[0m\n\n\n"
+
+
+printf "\n\n\033[0;32m ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\033[0m\n"
+printf "\033[0;32m █░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░███░░░░░░██░░░░░░█░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█\033[0m\n"
+printf "\033[0;32m █░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█\033[0m\n"
+printf "\033[0;32m █░░▄▀░░░░░░░░░░█░░░░░░▄▀░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░█░░░░▄▀░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█\033[0m\n"
+printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░█████████░░▄▀░░█████████░░▄▀░░████░░▄▀░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░█████████░░▄▀░░█████████\033[0m\n"
+printf "\033[0;32m █░░▄▀░░░░░░░░░░█████░░▄▀░░█████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█\033[0m\n"
+printf "\033[0;32m █░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█\033[0m\n"
+printf "\033[0;32m █░░▄▀░░░░░░░░░░█████░░▄▀░░█████░░░░░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░▄▀░░░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░░░░░░░░░█░░░░░░░░░░▄▀░░█\033[0m\n"
+printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████████████░░▄▀░░█░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████░░▄▀▄▀░░▄▀▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░█████████████████░░▄▀░░█\033[0m\n"
+printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████░░░░░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░░░█░░░░▄▀▄▀▄▀░░░░█░░░░▄▀░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░░░░░░░░░▄▀░░█\033[0m\n"
+printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░███░░░░▄▀░░░░███░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█\033[0m\n"
+printf "\033[0;32m █░░░░░░█████████████░░░░░░█████░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█████░░░░░░█████░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█\033[0m\n"
+printf "\033[0;32m ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\033[0m\n\n\n"0
+# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+# # # On first install only
+# kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+
+# kubectl apply -f ./srcs/metallb-config.yaml
 arr=(
     mysql
     phpmyadmin
@@ -16,27 +43,29 @@ arr=(
     grafana
 )
 
-# echo "-------delete-------"
-# for k in "${arr[@]}"; do
-#     kubectl delete -f ./srcs/$k-deployment.yaml
-# done
-# echo "------- done -------"
-
-echo "-------create-------"
-for i in "${arr[@]}"; do
-    docker build -t $i ./srcs/$i
-done
-# kubectl create namespace monitoring
-# Create secret for mysql
-kubectl apply -f ./srcs/secret.yaml
-# Create volumes
-kubectl apply -f ./srcs/PersistentVolume.yaml
-# Applying yaml files to deploy nignx mysql and wordpress
-for j in "${arr[@]}"; do
-    kubectl apply -f ./srcs/$j-deployment.yaml
-done
-echo "------- done -------"
-
+function start_up(){
+    if [[ $1 == "delete" ]]; then
+        echo "-------delete-------"
+        for k in "${arr[@]}"; do
+            kubectl delete -f ./srcs/$k-deployment.yaml
+        done
+        echo "------- done -------"
+    elif [[ $1 == "start" ]]; then
+        echo "-------create-------"
+        for i in "${arr[@]}"; do
+            docker build -t $i ./srcs/$i
+        done
+        # Create secret for mysql
+        kubectl apply -f ./srcs/secret.yaml
+        # Create volumes
+        kubectl apply -f ./srcs/PersistentVolume.yaml
+        for j in "${arr[@]}"; do
+            kubectl apply -f ./srcs/$j-deployment.yaml
+        done
+        echo "------- done -------"
+    fi
+}
+start_up $1
 
 # echo "====================================="
 # echo "==---------------------------------=="

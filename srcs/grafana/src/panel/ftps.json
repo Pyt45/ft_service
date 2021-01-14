@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 4,
   "links": [],
   "panels": [
     {
@@ -103,7 +103,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "influxdb"
+              "value": "ftps"
             }
           ]
         }
@@ -112,7 +112,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "influxdb",
+      "title": "ftps",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -162,7 +162,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "influxdb",
-  "uid": "QTGrbZfGk",
+  "title": "ftps",
+  "uid": "i7_wxWBGz",
   "version": 1
 }

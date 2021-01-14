@@ -42,10 +42,8 @@ RUN ssh-keygen -A
 
 # copy files
 ADD ./src/index.html /www/index.html
-ADD ./src/run.sh /usr/bin/run.sh
 ADD ./src/telegraf.conf /etc/telegraf/telegraf.conf
 ADD ./src/supervisord.conf /etc/supervisord.conf
-RUN chmod +x /usr/bin/run.sh
 
 # define port
 

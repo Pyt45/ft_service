@@ -14,8 +14,8 @@ ADD ./src/create-admin.sh /
 #     && ./create-admin.sh
 ADD ./src/supervisord.conf /etc/
 RUN openrc && touch /run/openrc/softlevel
-# ADD ./src/entry-point.sh /usr/bin/entry-point.sh
-# RUN chmod +x /usr/bin/entry-point.sh
+# ADD ./src/create-admin.sh /usr/bin/create-admin.sh
+# RUN chmod +x /usr/bin/create-admin.sh
 
 EXPOSE 8086
-ENTRYPOINT ["/usr/bin/supervisord"]
+ENTRYPOINT /usr/bin/supervisord

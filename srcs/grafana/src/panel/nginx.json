@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 7,
   "links": [],
   "panels": [
     {
@@ -103,7 +103,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "influxdb"
+              "value": "nginx"
             }
           ]
         }
@@ -112,7 +112,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "influxdb",
+      "title": "nginx",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -162,7 +162,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "influxdb",
-  "uid": "QTGrbZfGk",
+  "title": "nginx",
+  "uid": "oYnqbWBGk",
   "version": 1
 }

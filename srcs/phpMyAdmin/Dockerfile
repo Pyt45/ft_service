@@ -40,10 +40,8 @@ RUN cd /www/phpmyadmin/ && mkdir tmp && chmod 777 tmp
 
 ADD ./src/index.html /www/index.html
 ADD ./src/test1.php /www/test1.php
-ADD ./src/run.sh /usr/bin/run.sh
 ADD ./src/telegraf.conf /etc/telegraf/telegraf.conf
 ADD ./src/supervisord.conf /etc/supervisord.conf
-RUN chmod +x /usr/bin/run.sh
 RUN rc-status
 RUN touch /run/openrc/softlevel
 # RUN /usr/sbin/php-fpm7

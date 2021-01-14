@@ -1,3 +1,4 @@
 #!/bin/sh
-influx -execute 'create user 'admin' with password 'admin' with all privileges'
-influx -execute 'create database influxdb'
+influx -execute "CREATE USER \"admin\" WITH PASSWORD 'admin' WITH ALL PRIVILEGES"
+influx -username admin -password admin -execute "CREATE DATABASE influxdb"
+/usr/bin/supervisord
