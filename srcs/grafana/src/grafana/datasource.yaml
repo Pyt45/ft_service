@@ -10,6 +10,6 @@ datasources:
     user: admin
     database: influxdb
     basicAuth: true
-    basicAuthUser: true
-    basicAuthPassword: true
+    basicAuthUser: admin
+    basicAuthPassword: admin
     isDefaul: true
