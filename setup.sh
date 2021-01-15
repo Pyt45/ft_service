@@ -1,19 +1,26 @@
 #!/bin/sh
 # author: ayoub
 # 42 Project: ft_services
-printf "\n\n\033[0;32m ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\033[0m\n"
-printf "\033[0;32m █░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█████████████████░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░███░░░░░░██░░░░░░█░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█\033[0m\n"
-printf "\033[0;32m █░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█████████████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█\033[0m\n"
-printf "\033[0;32m █░░▄▀░░░░░░░░░░█░░░░░░▄▀░░░░░░█████████████████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░█░░░░▄▀░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█\033[0m\n"
-printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████████████████████░░▄▀░░█████████░░▄▀░░█████████░░▄▀░░████░░▄▀░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░█████████░░▄▀░░█████████\033[0m\n"
-printf "\033[0;32m █░░▄▀░░░░░░░░░░█████░░▄▀░░█████████████████████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█\033[0m\n"
-printf "\033[0;32m █░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████████████████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█\033[0m\n"
-printf "\033[0;32m █░░▄▀░░░░░░░░░░█████░░▄▀░░█████████████████████░░░░░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░▄▀░░░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░░░░░░░░░█░░░░░░░░░░▄▀░░█\033[0m\n"
-printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████████████████████████████░░▄▀░░█░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████░░▄▀▄▀░░▄▀▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░█████████████████░░▄▀░░█\033[0m\n"
-printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████████████████████░░░░░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░░░█░░░░▄▀▄▀▄▀░░░░█░░░░▄▀░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░░░░░░░░░▄▀░░█\033[0m\n"
-printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████████████████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░███░░░░▄▀░░░░███░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█\033[0m\n"
-printf "\033[0;32m █░░░░░░█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█████░░░░░░█████░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█\033[0m\n"
-printf "\033[0;32m ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\033[0m\n\n\n"
+# printf "\n\n\033[0;32m ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\033[0m\n"
+# printf "\033[0;32m █░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█████████████████░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░███░░░░░░██░░░░░░█░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█\033[0m\n"
+# printf "\033[0;32m █░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█████████████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█\033[0m\n"
+# printf "\033[0;32m █░░▄▀░░░░░░░░░░█░░░░░░▄▀░░░░░░█████████████████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░█░░░░▄▀░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█\033[0m\n"
+# printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████████████████████░░▄▀░░█████████░░▄▀░░█████████░░▄▀░░████░░▄▀░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░█████████░░▄▀░░█████████\033[0m\n"
+# printf "\033[0;32m █░░▄▀░░░░░░░░░░█████░░▄▀░░█████████████████████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█\033[0m\n"
+# printf "\033[0;32m █░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████████████████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█\033[0m\n"
+# printf "\033[0;32m █░░▄▀░░░░░░░░░░█████░░▄▀░░█████████████████████░░░░░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░▄▀░░░░███░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░░░░░░░░░█░░░░░░░░░░▄▀░░█\033[0m\n"
+# printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████████████████████████████░░▄▀░░█░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████░░▄▀▄▀░░▄▀▄▀░░███░░▄▀░░███░░▄▀░░█████████░░▄▀░░█████████████████░░▄▀░░█\033[0m\n"
+# printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████████████████████░░░░░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░░░█░░░░▄▀▄▀▄▀░░░░█░░░░▄▀░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░░░░░░░░░▄▀░░█\033[0m\n"
+# printf "\033[0;32m █░░▄▀░░█████████████░░▄▀░░█████████████████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░███░░░░▄▀░░░░███░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█\033[0m\n"
+# printf "\033[0;32m █░░░░░░█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█████░░░░░░█████░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█\033[0m\n"
+# printf "\033[0;32m ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\033[0m\n\n\n"
+
+SSH_USERNAME="user"
+SSH_PASSWORD="pass1234"
+FTPS_USERNAME="user"
+FTPS_PASSWORD="pass1234"
+DB_USER="admin"
+DB_PASSWORD="admin"
 
 arr=(
     mysql
@@ -36,63 +43,63 @@ function install_kube(){
     pre_config_start=`date +%s`
     # Install Brew
     if ! $(which -s brew &> /dev/null); then
-        echo -e "\033[1;32mBrew Not Installed, Installing...\033[0m"
+        echo "\033[0;31mBrew Not Installed, Installing...\033[0m"
         # Install brew
 		rm -rf $HOME/.brew
         git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew
         echo 'export PATH=$HOME/.brew/bin:$PATH' >> $HOME/.zshrc
         source $HOME/.zshrc
+        mv $brew_home $brew_dest
+        ln -s $brew_dest
     else
-      echo -e "\033[0;32mBrew Allredy Installed\033[0m"
+        echo "\033[0;32mBrew Alredy Installed\033[0m"
+        # mv $brew_home $brew_dest
+        # ln -s $brew_dest
     fi
-    mv $brew_home $brew_dest
-    ln -s $brew_dest
-    echo -e "\033[0;32mUpdating Brew...\033[0m"
+    echo "\033[0;32mUpdating Brew...\033[0m"
     brew update &> /dev/null
     # KUBECTL
     if ! $(which -s kubectl &> /dev/null); then
-        echo -e "\033[1;32mKubectl not Installed, Installing...\033[0m"
+        echo "\033[0;31mKubectl not Installed, Installing...\033[0m"
         # Install kubectl
         brew install kubectl
+        rm -rf $HOME/.kube
+        rm -rf $kube_dest
+        mkdir $kube_dest
+        ln -s $kube_dest
+    else
+        echo "\033[0;32mKubectl Alredy Installed\033[0m"
     fi
     # MINIKUBE
     if ! $(which -s minikube &> /dev/null); then
-        echo -e "\033[1;32mMinikube not Installed, Installing...\033[0m"
+        echo "\033[1;32mMinikube not Installed, Installing...\033[0m"
         # Install Minikube 
         brew install minikube
+        rm -rf $HOME/.minikube
+        rm -rf $minikube_dest
+        mkdir $minikube_dest
+        ln -s $minikube_dest
+    else
+        echo "\033[0;32mMinikube Allredy Installed\033[0m"
     fi
     # DOCKER
     if ! $(which -s docker &> /dev/null); then
-      echo -e "\033[1;32mDocker not Installed, Installing...\033[0m"
+      echo "\033[1;32mDocker not Installed, Installing...\033[0m"
       # Install Docker
-      brw install docker
+      brew install docker
+      rm -rf $HOME/.docker
+      rm -rf $docker_dest
+      mkdir $docker_dest
+      ln -s $docker_dest
+    else
+        echo "\033[0;32mDocker Allredy Installed\033[0m"
     fi
-    rm -rf .docker
-    rm -rf .minikube
-    rm -rf $docker_dest
-    rm -rf $dir_minikube
-    rm -rf $kube_dest
-    mkdir $docker_dest
-	mkdir $kube_dest
-    mkdir $minikube_dest
-	ln -s $minikube_dest
-    ln -s $docker_dest
-    ln -s $kube_dest
     pre_config_end=`date +%s`	
 	runtime=$((pre_config_end-pre_config_start))
-	echo -e "\033[0;32mPre-config done - $runtime seconds)\033[0m"
+	echo "\033[1;31mPre-config done - $runtime seconds)\033[0m"
 }
 
 function set_up() {
-    # Install metallb
-    kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
-    kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
-    # On first install only
-    if ! $(kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"); then
-        echo -e "\033[1;32mSecretKey Alredy Exist\033[0m"
-    fi
-    # ConfigMap
-    kubectl apply -f ./srcs/metallb-config.yaml
     minikube delete &> /dev/null
     echo "\033[0;32mCreating VirtualMachine\033[0m"
     if ! $(minikube start --vm-driver=virtualbox --disk-size=20g --memory=4g --cpus=4 &> /dev/null); then
@@ -109,10 +116,20 @@ function set_up() {
     fi
     eval $(minikube docker-env)
     if [ $? -eq 0 ]; then
-        echo -e "\033[1;32ENVIRMENT EXPORTED\033[0m"
+        echo -e "\033[1;32mENVIRMENT EXPORTED\033[0m"
     else
         echo -e "\033[0;32mERROR SETING ENVIREMENT\033[0m"
     fi
+
+    # Install metallb
+    kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+    kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+    # On first install only
+    if ! $(kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"); then
+        echo -e "\033[1;32mSecretKey Alredy Exist\033[0m"
+    fi
+    # ConfigMap
+    kubectl apply -f ./srcs/metallb-config.yaml
 }
 
 function start_up(){
@@ -121,11 +138,11 @@ function start_up(){
     elif [[ $1 == "setup" ]]; then
         set_up
     elif [[ $1 == "delete" ]]; then
-        echo -e "\033[1;32m-------delete-------\033[0m"
+        echo "\033[1;32m-------delete-------\033[0m"
         for k in "${arr[@]}"; do
             kubectl delete -f ./srcs/$k-deployment.yaml
         done
-        echo -e "\033[1;32m------- All Services Deleted -------\033[0m"
+        echo "\033[1;32m------- All Services Deleted -------\033[0m"
     elif [[ $1 == "start" ]]; then
         start_time=`data +%s`
         echo "\033[0;32m-------Starting-------\033[0m"
@@ -147,12 +164,16 @@ function start_up(){
         end_time=`date +%s`
         # FT_SERVICES_IP=`kubectl get svc | grep EXTERNAL_IP | awk '{print $4}'` # Error
         runtime=$((end_time-start_time))
+        minikube dashboard
     fi
 }
 
 function ft_services() {
+runtime=5
+MINIKUBE_IP=192
+FT_SERVICES_IP=9
 echo "✅		ft_services deployment done (Hourra ! - $runtime seconds)"
-echo " 
+echo "\033[1;32m
 Minikube IP is : $MINIKUBE_IP - Type 'minikube dashboard' for dashboard
 ================================================================================
 LINKS:
@@ -173,7 +194,7 @@ ACCOUNTS:			(username:password)
 TEST PERSISTENT MYSQL/INFLUXDB:
 	kubectl exec -it \$(kubectl get pods | grep mysql | cut -d\" \" -f1) -- /bin/sh -c \"kill 1\"
 	kubectl exec -it \$(kubectl get pods | grep influxdb | cut -d\" \" -f1) -- /bin/sh -c \"kill 1\"
-"
+\033[0m"
 }
 
 start_up $1
