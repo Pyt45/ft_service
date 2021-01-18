@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.12.3
 RUN apk update \
     && apk add wget
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
@@ -8,10 +8,10 @@ RUN tar -zxvf grafana-7.3.6.linux-amd64.tar.gz \
     && mv grafana-7.3.6 grafana
 RUN apk add libc6-compat telegraf supervisor
 RUN mkdir -p /etc/telegraf \
-    && mkdir -p /etc/grafana \
-    && mkdir -p /etc/grafana/provisioning \
-    && mkdir -p /etc/grafana/provisioning/dashboards \
-    && mkdir -p /etc/grafana/provisioning/datasources
+    && mkdir -p /etc/grafana
+    # && mkdir -p /etc/grafana/provisioning \
+    # && mkdir -p /etc/grafana/provisioning/dashboards \
+    # && mkdir -p /etc/grafana/provisioning/datasources
 
 ADD ./src/telegraf.conf /etc/telegraf/telegraf.conf
 ADD ./src/supervisord.conf /etc/

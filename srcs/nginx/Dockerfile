@@ -1,5 +1,4 @@
-FROM alpine:latest
-ARG user
+FROM alpine:3.12.3
 # update , remove cache to keep the conatiner small and install nginx
 
 RUN apk update

@@ -1,5 +1,4 @@
-FROM alpine:latest
-ARG user
+FROM alpine:3.12.3
 # update , remove cache to keep the conatiner small and install nginx
 
 RUN apk update
@@ -39,7 +38,7 @@ RUN cd /www/phpmyadmin/ && mkdir tmp && chmod 777 tmp
 # copy files
 
 ADD ./src/index.html /www/index.html
-ADD ./src/test1.php /www/test1.php
+ADD ./src/test.php /www/test.php
 ADD ./src/telegraf.conf /etc/telegraf/telegraf.conf
 ADD ./src/supervisord.conf /etc/supervisord.conf
 RUN rc-status
