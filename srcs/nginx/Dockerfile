@@ -31,8 +31,6 @@ RUN rc-status
 # RUN mkdir /run/openrc/
 RUN mkdir /run/openrc/softlevel
 RUN /etc/init.d/sshd start
-# RUN rc-update add sshd
-# RUN rc-status
 
 # Create a user
 RUN adduser -D user

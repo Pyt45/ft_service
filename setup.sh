@@ -33,7 +33,7 @@ arr=(
 )
 
 function install_kube(){
-    dir_goinfre=/goinfre/$USER
+    dir_goinfre=/goinfre
     docker_dest=$dir_goinfre/.docker
     kube_dest=$dir_goinfre/.kube
     minikube_dest=$dir_goinfre/.minikube
@@ -124,12 +124,39 @@ function set_up() {
     # Install metallb
     kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
     kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
-    # On first install only
-    if ! $(kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"); then
-        echo -e "\033[1;32mSecretKey Alredy Exist\033[0m"
-    fi
-    # ConfigMap
+    # # On first install only
+    kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+    # # ConfigMap
     kubectl apply -f ./srcs/metallb-config.yaml
+}
+
+
+function ft_services() {
+    MINIKUBE_IP=`minikube ip`
+    FT_SERVICES_IP=`kubectl get svc | grep nginx | awk '{print $4}'`
+    echo "\033[0;32m✅		ft_services deployment done (Hourra !)\033[0m"
+    echo "\033[1;32m
+    Minikube IP is : $MINIKUBE_IP
+    ================================================================================
+    LINKS:
+        nginx:			https://$FT_SERVICES_IP (or http)
+        wordpress:		http://$FT_SERVICES_IP:5050
+        phpmyadmin:		http://$FT_SERVICES_IP:5000
+        grafana:		http://$FT_SERVICES_IP:3000
+    OTHERS:
+        nginx:			ssh user@$FT_SERVICES_IP -p 22
+        ftps:			USING FILEZILLA
+        
+    ACCOUNTS:			(username:password)
+        ssh:			$SSH_USERNAME:$SSH_PASSWORD (port 22)
+        ftps:			$FTPS_USERNAME:$FTPS_PASSWORD (port 21)
+        database:		$DB_USER:$DB_PASSWORD (sql / phpmyadmin)
+        grafana:		admin:admin
+        wordpress:              admin:admin (Admin)
+    TEST PERSISTENT MYSQL/INFLUXDB:
+        kubectl exec -it \$(kubectl get pods | grep mysql | cut -d\" \" -f1) -- /bin/sh -c \"kill 1\"
+        kubectl exec -it \$(kubectl get pods | grep influxdb | cut -d\" \" -f1) -- /bin/sh -c \"kill 1\"
+    \033[0m"
 }
 
 function start_up(){
@@ -144,7 +171,7 @@ function start_up(){
         done
         echo "\033[1;32m------- All Services Deleted -------\033[0m"
     elif [[ $1 == "start" ]]; then
-        start_time=`data +%s`
+        start_time=`date +%s`
         echo "\033[0;32m-------Starting-------\033[0m"
         for i in "${arr[@]}"; do
             docker build -t $i ./srcs/$i
@@ -165,37 +192,9 @@ function start_up(){
         # FT_SERVICES_IP=`kubectl get svc | grep EXTERNAL_IP | awk '{print $4}'` # Error
         runtime=$((end_time-start_time))
         minikube dashboard
+    elif [[ $1 == "show" ]]; then
+        ft_services
     fi
 }
 
-function ft_services() {
-runtime=5
-MINIKUBE_IP=192
-FT_SERVICES_IP=9
-echo "✅		ft_services deployment done (Hourra ! - $runtime seconds)"
-echo "\033[1;32m
-Minikube IP is : $MINIKUBE_IP - Type 'minikube dashboard' for dashboard
-================================================================================
-LINKS:
-	nginx:			https://$FT_SERVICES_IP (or http)
-	wordpress:		http://$FT_SERVICES_IP:5050
-	phpmyadmin:		http://$FT_SERVICES_IP:5000
-	grafana:		http://$FT_SERVICES_IP:3000
-OTHERS:
-	nginx:			ssh admin@$FT_SERVICES_IP -p 22
-	ftps:			USING FILEZILLA
-	
-ACCOUNTS:			(username:password)
-	ssh:			$SSH_USERNAME:$SSH_PASSWORD (port 22)
-	ftps:			$FTPS_USERNAME:$FTPS_PASSWORD (port 21)
-	database:		$DB_USER:$DB_PASSWORD (sql / phpmyadmin)
-	grafana:		admin:admin
-	wordpress:      admin:admin (Admin)
-TEST PERSISTENT MYSQL/INFLUXDB:
-	kubectl exec -it \$(kubectl get pods | grep mysql | cut -d\" \" -f1) -- /bin/sh -c \"kill 1\"
-	kubectl exec -it \$(kubectl get pods | grep influxdb | cut -d\" \" -f1) -- /bin/sh -c \"kill 1\"
-\033[0m"
-}
-
 start_up $1
-ft_services
