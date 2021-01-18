@@ -114,11 +114,10 @@ function set_up() {
     else
         echo "\033[0;32mVirtualMachine was created successfully\033[0m"
     fi
-    eval $(minikube docker-env)
-    if [ $? -eq 0 ]; then
-        echo -e "\033[1;32mENVIRMENT EXPORTED\033[0m"
+    if ! $(eval $(minikube docker-env)); then
+        echo "\033[0;32mERROR SETING ENVIREMENT\033[0m"
     else
-        echo -e "\033[0;32mERROR SETING ENVIREMENT\033[0m"
+        echo "\033[1;32mENVIRMENT EXPORTED\033[0m"
     fi
 
     # Install metallb
