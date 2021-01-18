@@ -80,7 +80,7 @@ function install_kube(){
         mkdir $minikube_dest
         ln -s $minikube_dest
     else
-        echo "\033[0;32mMinikube Allredy Installed\033[0m"
+        echo "\033[0;32mMinikube Alredy Installed\033[0m"
     fi
     # DOCKER
     if ! $(which -s docker &> /dev/null); then
@@ -92,7 +92,7 @@ function install_kube(){
       mkdir $docker_dest
       ln -s $docker_dest
     else
-        echo "\033[0;32mDocker Allredy Installed\033[0m"
+        echo "\033[0;32mDocker Alredy Installed\033[0m"
     fi
     pre_config_end=`date +%s`	
 	runtime=$((pre_config_end-pre_config_start))
@@ -187,11 +187,10 @@ function start_up(){
             kubectl apply -f ./srcs/$j-deployment.yaml
         done
         sleep 4
-        echo "\033[0;32m------- Done -------\033[0m"
         end_time=`date +%s`
-        # FT_SERVICES_IP=`kubectl get svc | grep EXTERNAL_IP | awk '{print $4}'` # Error
         runtime=$((end_time-start_time))
-        minikube dashboard
+       echo "\033[1;31mPre-config done - $runtime seconds)\033[0m"
+        minikube dashboard &> /dev/null
     elif [[ $1 == "show" ]]; then
         ft_services
     fi
