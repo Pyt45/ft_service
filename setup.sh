@@ -114,12 +114,7 @@ function set_up() {
     else
         echo "\033[0;32mVirtualMachine was created successfully\033[0m"
     fi
-    if ! $(eval $(minikube docker-env)); then
-        echo "\033[0;32mERROR SETING ENVIREMENT\033[0m"
-    else
-        echo "\033[1;32mENVIRMENT EXPORTED\033[0m"
-    fi
-
+    eval $(minikube docker-env)
     # Install metallb
     kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
     kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
