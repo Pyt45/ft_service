@@ -64,7 +64,6 @@ function install_kube(){
         # Install kubectl
         brew install kubectl
         rm -rf $HOME/.kube
-        rm -rf $kube_dest
         mkdir $kube_dest
         ln -s $kube_dest
     else
@@ -76,7 +75,6 @@ function install_kube(){
         # Install Minikube 
         brew install minikube
         rm -rf $HOME/.minikube
-        rm -rf $minikube_dest
         mkdir $minikube_dest
         ln -s $minikube_dest
     else
@@ -88,7 +86,6 @@ function install_kube(){
       # Install Docker
       brew install docker
       rm -rf $HOME/.docker
-      rm -rf $docker_dest
       mkdir $docker_dest
       ln -s $docker_dest
     else
@@ -180,7 +177,7 @@ function start_up(){
         for j in "${arr[@]}"; do
             kubectl apply -f ./srcs/$j-deployment.yaml
         done
-        sleep 4
+        sleep 20
         end_time=`date +%s`
         runtime=$((end_time-start_time))
        echo "\033[1;31mPre-config done - $runtime seconds)\033[0m"
